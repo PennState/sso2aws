@@ -51,6 +51,15 @@ jobs:
           template: '@/contrib/sarif.tpl'
           output: 'trivy-results.sarif'
           severity: 'HIGH,CRITICAL'
+          exit-code: 0
+
+      - name: Run Trivy with human-readable output
+        uses: aquasecurity/trivy-action@master
+        with:
+          scan-type: 'fs'
+          ignore-unfixed: true
+          format: 'table'
+          severity: 'HIGH,CRITICAL'
           exit-code: 1
 
       - name: Upload Trivy scan results to GitHub Security tab
