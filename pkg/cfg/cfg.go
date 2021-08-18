@@ -16,12 +16,12 @@ type Cfg struct {
 }
 
 type SSOConfig struct {
-	SSOStartURL  string `config:"aws_sso_start_url" ini:"aws_sso_start_url" yaml:"aws_sso_start_url"`
-	SSORegion    string `config:"aws_sso_region" ini:"aws_sso_region"`
-	SSOAccountID int    `config:"aws_sso_account_id" ini:"aws_sso_account_id"`
-	SSORoleName  string `config:"aws_sso_role_name" ini:"aws_sso_role_name"`
-	Region       string `config:"aws_region" ini:"aws_region"`
-	Output       string `config:"aws_output" ini:"aws_output"`
+	SSOStartURL  string `config:"sso_start_url" ini:"sso_start_url" yaml:"sso_start_url"`
+	SSORegion    string `config:"sso_region" ini:"sso_region"`
+	SSOAccountID int    `config:"sso_account_id" ini:"sso_account_id"`
+	SSORoleName  string `config:"sso_role_name" ini:"sso_role_name"`
+	Region       string `config:"region" ini:"region"`
+	Output       string `config:"output" ini:"output"`
 }
 
 const (
