@@ -28,7 +28,5 @@ func runLogin(cmd *cobra.Command, args []string) error {
 
 	log.Infof("Running `aws sso login --profile=%s`", c.Profile)
 
-	shell.ExecShellCmd([]string{"aws", "sso", "login", "--profile=" + c.Profile}, []string{})
-
-	return nil
+	return shell.ExecShellCmd([]string{"aws", "sso", "login", "--profile=" + c.Profile}, []string{})
 }

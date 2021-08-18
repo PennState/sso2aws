@@ -37,7 +37,10 @@ func updateAwsConfig() (string, error) {
 		return "", fmt.Errorf("error loading AWS config: %s", err)
 	}
 
-	ac.SetSSOProfile(c.Profile, &c.SSOConfig)
+	err = ac.SetSSOProfile(c.Profile, &c.SSOConfig)
+	if err != nil {
+		return "", fmt.Errorf("could not set SSO profile: %s", err)
+	}
 
 	err = ac.Save()
 	if err != nil {

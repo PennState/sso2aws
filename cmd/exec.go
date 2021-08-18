@@ -23,7 +23,5 @@ func runExec(cmd *cobra.Command, args []string) error {
 		return err
 	}
 
-	shell.ExecShellCmd(args, []string{"AWS_PROFILE=" + c.Profile})
-
-	return nil
+	return shell.ExecShellCmd(args, []string{"AWS_PROFILE=" + c.Profile})
 }
