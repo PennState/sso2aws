@@ -9,7 +9,6 @@ import (
 	"github.com/apex/log"
 	"github.com/apex/log/handlers/cli"
 	"github.com/spf13/cobra"
-	flag "github.com/spf13/pflag"
 )
 
 var rootCmd = &cobra.Command{
@@ -25,10 +24,10 @@ var c *cfg.Cfg
 func init() {
 	log.SetHandler(cli.Default)
 
-	debug := flag.BoolP("debug", "D", false, "debug output")
-	flag.Parse()
+	var debug bool
+	rootCmd.PersistentFlags().BoolVarP(&debug, "debug", "d", false, "debug output")
 
-	if *debug {
+	if debug {
 		log.SetLevel(log.DebugLevel)
 	}
 

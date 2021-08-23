@@ -2,7 +2,9 @@ package cfg
 
 import (
 	"context"
+	"encoding/json"
 	"fmt"
+	"log"
 	"os"
 
 	"github.com/PennState/sso2aws/pkg/envcfg"
@@ -16,7 +18,7 @@ type Cfg struct {
 }
 
 type SSOConfig struct {
-	SSOStartURL  string `config:"sso_start_url" ini:"sso_start_url" yaml:"sso_start_url"`
+	SSOStartURL  string `config:"sso_start_url" ini:"sso_start_url"`
 	SSORegion    string `config:"sso_region" ini:"sso_region"`
 	SSOAccountID int    `config:"sso_account_id" ini:"sso_account_id"`
 	SSORoleName  string `config:"sso_role_name" ini:"sso_role_name"`
@@ -52,6 +54,14 @@ func (cfg *Cfg) Load() error {
 	)
 
 	return loader.Load(context.TODO(), cfg)
+}
+
+func (cfg *Cfg) Print() {
+	j, err := json.MarshalIndent(cfg, "", "  ")
+	if err != nil {
+		log.Fatal(err)
+	}
+	fmt.Printf("%s\n", string(j))
 }
 
 func defaultConfigDir() string {

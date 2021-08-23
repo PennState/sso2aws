@@ -1,7 +1,6 @@
 package cmd
 
 import (
-	"github.com/apex/log"
 	"github.com/spf13/cobra"
 )
 
@@ -18,7 +17,7 @@ func init() {
 }
 
 func runGetConfig(cmd *cobra.Command, args []string) error {
-	log.Infof("sso2aws config: %+v", c)
+	c.Print()
 
 	return nil
 }
