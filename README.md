@@ -27,7 +27,7 @@ Flags:
 
 ## Configuration
 
-Config can be set via YAML (~/.sso2aws.yaml) and overriden via environment variable (eg with direnv).
+Config can be set via YAML (~/.config/sso2aws.yaml) and overriden via environment variable (eg with direnv).
 
 |cfg name|envvar|default|usage|
 |---|---|---|---|
@@ -36,4 +36,17 @@ Config can be set via YAML (~/.sso2aws.yaml) and overriden via environment varia
 |sso_config.sso_start_url|SSO2AWS_SSO_START_URL|-|AWS SSO Start URL|
 |sso_config.sso_role_name|SSO2AWS_SSO_ROLE_NAME|AdministratorAccess|AWS role name|
 |sso_config.sso_region|SSO2AWS_SSO_REGION|us-east-1|AWS SSO Region|
+|sso_config.output|SSO2AWS_OUTPUT|json|AWS CLI output format|
 |profile|SSO2AWS_PROFILE|sso2aws|AWS config profile name to use|
+
+### Example YAML config
+
+```yaml
+profile: sso2aws
+sso_config:
+  region: us-east-1
+  sso_account_id: 123456789
+  sso_start_url: https://my-sso-portal.awsapps.com/start
+  sso_role_name: AdministratorAccess
+  sso_region: us-east-1
+```
