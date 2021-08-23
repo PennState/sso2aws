@@ -16,7 +16,7 @@ jobs:
     - name: Set up Go
       uses: actions/setup-go@v2
       with:
-        go-version: 1.16
+        go-version: 1.16.x
 
     - name: Build
       run: go build -v ./...
@@ -33,7 +33,7 @@ jobs:
         uses: golangci/golangci-lint-action@v2
         with:
           # Optional: version of golangci-lint to use in form of v1.2 or v1.2.3 or `latest` to use the latest version
-          version: v1.29
+          version: latest
 
   trivy:
     name: Trivy
@@ -53,6 +53,11 @@ jobs:
           severity: 'HIGH,CRITICAL'
           exit-code: 0
 
+      - name: Upload Trivy scan results to GitHub Security tab
+        uses: github/codeql-action/upload-sarif@v1
+        with:
+          sarif_file: 'trivy-results.sarif'
+                    
       - name: Run Trivy with human-readable output
         uses: aquasecurity/trivy-action@master
         with:
@@ -61,11 +66,6 @@ jobs:
           format: 'table'
           severity: 'HIGH,CRITICAL'
           exit-code: 1
-
-      - name: Upload Trivy scan results to GitHub Security tab
-        uses: github/codeql-action/upload-sarif@v1
-        with:
-          sarif_file: 'trivy-results.sarif'
 
   goreleaser:
     needs:
@@ -83,7 +83,7 @@ jobs:
         name: Set up Go
         uses: actions/setup-go@v2
         with:
-          go-version: 1.15
+          go-version: 1.16.x
       -
         name: Run GoReleaser
         uses: goreleaser/goreleaser-action@v2
@@ -91,7 +91,7 @@ jobs:
           # either 'goreleaser' (default) or 'goreleaser-pro'
           distribution: goreleaser
           version: latest
-          args: release --rm-dist
+          args: build --snapshot --rm-dist
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           # Your GoReleaser Pro key, if you are using the 'goreleaser-pro' distribution
