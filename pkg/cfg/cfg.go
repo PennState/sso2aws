@@ -6,8 +6,10 @@ import (
 	"fmt"
 	"log"
 	"os"
+	"strconv"
 
 	"github.com/PennState/sso2aws/pkg/envcfg"
+	"github.com/hashicorp/go-multierror"
 	"github.com/heetch/confita"
 	"github.com/heetch/confita/backend/file"
 )
@@ -20,7 +22,7 @@ type Cfg struct {
 type SSOConfig struct {
 	SSOStartURL  string `config:"sso_start_url" ini:"sso_start_url"`
 	SSORegion    string `config:"sso_region" ini:"sso_region"`
-	SSOAccountID int    `config:"sso_account_id" ini:"sso_account_id"`
+	SSOAccountID string `config:"sso_account_id" ini:"sso_account_id"`
 	SSORoleName  string `config:"sso_role_name" ini:"sso_role_name"`
 	Region       string `config:"region" ini:"region"`
 	Output       string `config:"output" ini:"output"`
@@ -78,7 +80,11 @@ func defaultConfigFile() string {
 }
 
 func (cfg *Cfg) Validate() error {
-	// check required keys
+	var errors error
 
-	return nil
+	if _, err := strconv.Atoi(cfg.SSOConfig.SSOAccountID); err != nil {
+		errors = multierror.Append(errors, fmt.Errorf("SSOAccountID is not a number (%s): %s", cfg.SSOConfig.SSOAccountID, err))
+	}
+
+	return errors
 }

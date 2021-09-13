@@ -8,6 +8,7 @@ require (
 	github.com/apex/log v1.9.0
 	github.com/aws/aws-sdk-go-v2/config v1.6.0
 	github.com/go-ini/ini v1.62.0
+	github.com/hashicorp/go-multierror v1.1.1 // indirect
 	github.com/heetch/confita v0.10.0
 	github.com/sirupsen/logrus v1.4.2 // indirect
 	github.com/spf13/cobra v1.2.1

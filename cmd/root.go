@@ -36,6 +36,11 @@ func init() {
 	if err != nil {
 		log.Fatalf("Failed to load config: %s", err)
 	}
+
+	err = c.Validate()
+	if err != nil {
+		log.Fatalf("Failed to validate config: %s", err)
+	}
 }
 
 // Execute executes this command
